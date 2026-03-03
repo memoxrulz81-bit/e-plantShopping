@@ -33,6 +33,8 @@ It allows users to browse categorized plants, add them to a shopping cart, updat
 ```
 src/
 │
+├── AboutUs.css         # AboutUs styling
+├── AboutUs.js          # Site info
 ├── CartSlice.js        # Redux slice (cart logic)
 ├── CartItem.js         # Cart page component
 ├── ProductList.js      # Product listing page
@@ -40,6 +42,9 @@ src/
 ├── CartItem.css        # Cart styling
 ├── store.js            # Redux store configuration
 └── index.js            # App entry point
+└── App.js              # App entry point
+└── App.css             # App styling
+└── main.js             # main entry point
 ```
 
 ---
@@ -70,5 +75,16 @@ Redux Toolkit is used to manage cart state.
 * `addItem(product)`
 * `removeItem(name)`
 * `updateQuantity({ name, quantity })`
-* `clearCa
+* `clearCart()
 
+💰 Total Calculations
+Total Quantity
+state.cart.items.reduce(
+  (total, item) => total + item.quantity,
+  0
+)
+Total Amount
+cart.reduce((total, item) => {
+  const cost = parseFloat(item.cost.substring(1));
+  return total + cost * item.quantity;
+}, 0);
