@@ -11,6 +11,8 @@ const CartItem = ({ onContinueShopping }) => {
   const calculateTotalAmount = (cart) => {
     let total = 0;
 
+    if (cart.quantity < 1 ) return total
+
     cart.forEach((item) => {
         // 3. Extract quantity and cost
         const quantity = item.quantity;
@@ -26,18 +28,17 @@ const CartItem = ({ onContinueShopping }) => {
         onContinueShopping(e);
   };
 
-
-
   const handleIncrement = (item) => {
     dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
   };
 
   const handleDecrement = (item) => {
-    if(item.quantity > 1)
-    dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
-    else
-    dispatch(removeItem (item));
-   
+    if(item.quantity > 1) {
+        dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));  
+    }     
+    else {
+        dispatch(removeItem (item));
+    }
   };
 
   const handleRemove = (item) => {
